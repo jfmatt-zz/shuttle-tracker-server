@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<!ELEMENT Info (BusInfo, StopInfo)>
+<!ELEMENT BusInfo (timestamp, Buses)>
+<!ELEMENT Buses (Bus+)>
+<!ELEMENT Bus (id, route, latitude, longitude, lastLatitude, lastLongitude, nextStopId, timeToNextStop)>
+<!ELEMENT StopInfo (timestamp, Stops)>
+<!ELEMENT Stops (Stop+)>
+<!ELEMENT Stop (id, timeToNextBus)>
+
+<!ELEMENT timestamp (#PCDATA)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT route (#PCDATA)>
+<!ELEMENT latitude (#PCDATA)>
+<!ELEMENT longitude (#PCDATA)>
+<!ELEMENT lastLatitude (#PCDATA)>
+<!ELEMENT lastLongitude (#PCDATA)>
+<!ELEMENT waiting (#PCDATA)>
+<!ELEMENT nextStop (#PCDATA)>
+<!ELEMENT timeToNextStop (#PCDATA)>
+<!ELEMENT timeToNextBus (#PCDATA)>
+
+<!-- Lat/long are doubles/floating point, timestamp is a long, all others are integers -->
+
+<!-- All time values are in milliseconds. Timstamps are measured from the Unix epoch as in Java. -->
+
+<!-- <running> is 1 if the bus is active (even if currently stopped) or 0 if it is parked -->
+
+<!-- Each stop tells its id number (<id>) and an estimate of how long it will be until the next bus arrives (<timeToNextBus>) -->
+
+<!-- Route values: 1=blue(main campus), 2=red(WCL), 3=white(special/summer).
+If 0, then it hasn't been determined yet (i.e. hasn't left Nebraska Ave).  -->
+
+<!-- Stop numbers: 
+0	=	none/unknown
+1	=	Southside
+2	=	Northside
+3	=	NebraskaHall
+4	=	VanNess
+5	=	TenleyCampus
+6	=	Metro
+7	=	WardBuilding(onNebraskaAve)
+8	=	WCL
+9	=	Katzen
+10  =   Brandywine
+
+Positive=northbound/on the way to Metro, negative=southbound/on the way to either campus
+
+All stop IDs = 1,2,3,4,5,6,8,9,10,-3,-4,-5,-7,-9
+Red Route = 8,9,3,4,5,10,6,-5,-4,-3,-9,8
+Blue Route = 1,2,3,4,5,6,-5,-4,-3,-7,1
+
+		public static readonly double[] STOP_LATS = {38.935204,38.938373,38.938985,38.943341,38.945713,38.948096,38.944829,38.938424,38.938534,38.942874,38.945213,38.936897,38.938879};
+		public static readonly double[] STOP_LONGS = {-77.090913,-77.088017,-77.084873,-77.081161,-77.079262,-77.078753,-77.09435,-77.086751,-77.085366,-77.081703,-77.079735,-77.086837,-77.087126};
+		public static readonly string[] STOP_NAMES = {"Southside", "Northside", "Nebraska N", "Nebraska S", "Van Ness N", "Van Ness S", "Tenley Campus N", "Tenley Campus S", "Metro", "Ward", "WCL", "Katzen N", "Katzen S", "Brandywine"};
+
+-->
